@@ -8,11 +8,11 @@
 2. 长按录制按钮，有个简单的圆形动效。其中，圆形的大小与说话音量大小有关，声音越大，圆的半径越大；
 3. 可以自定义录制时长的大小；
 
-![](https://github.com/xiu619544553/TKAudio/blob/master/images/record.gif)
+![](https://github.com/xiu619544553/TKAudio/blob/master/images/audio.gif)
+
 
 ## 使用
 
 1. 将📂AudioTool拖入工程中
-2. 修改Xcode配置：Build Settings > Enable Bitcode=NO
-
+2. 修改Xcode配置：Build Settings > Enable Bitcode = NO
 3. Build Phases > Link Binary With Libraries > 导入`AVFoundation.framework`
