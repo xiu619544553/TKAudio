@@ -8,17 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		416629BA22F560FC008F21DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 416629B922F560FC008F21DF /* AppDelegate.m */; };
-		416629BD22F560FC008F21DF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 416629BC22F560FC008F21DF /* ViewController.m */; };
 		416629C222F560FD008F21DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 416629C122F560FD008F21DF /* Assets.xcassets */; };
 		416629C522F560FD008F21DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 416629C322F560FD008F21DF /* LaunchScreen.storyboard */; };
 		416629C822F560FD008F21DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 416629C722F560FD008F21DF /* main.m */; };
-		416629D022F565B4008F21DF /* AudioVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 416629CF22F565B4008F21DF /* AudioVC.m */; };
+		416629D022F565B4008F21DF /* TKAudioVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 416629CF22F565B4008F21DF /* TKAudioVC.m */; };
 		416629E322F56691008F21DF /* VoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 416629D722F56691008F21DF /* VoiceConverter.mm */; };
 		416629E422F56691008F21DF /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 416629D922F56691008F21DF /* libopencore-amrwb.a */; };
 		416629E522F56691008F21DF /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 416629DA22F56691008F21DF /* libopencore-amrnb.a */; };
 		416629E622F56691008F21DF /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 416629E022F56691008F21DF /* amrFileCodec.mm */; };
-		416629E722F56691008F21DF /* NSFileManager+BDAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 416629E222F56691008F21DF /* NSFileManager+BDAdd.m */; };
 		416629F022F56BD7008F21DF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 416629EF22F56BD7008F21DF /* AVFoundation.framework */; };
+		416629FA22F5854D008F21DF /* TKRecordItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 416629F922F5854D008F21DF /* TKRecordItem.m */; };
+		41662A0022F58C0B008F21DF /* TKRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 416629FF22F58C0B008F21DF /* TKRootViewController.m */; };
+		41662A0A22F58FA4008F21DF /* TKRecordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41662A0422F58FA4008F21DF /* TKRecordManager.m */; };
+		41662A0B22F58FA4008F21DF /* UIView+TKAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 41662A0822F58FA4008F21DF /* UIView+TKAdd.m */; };
+		41662A0C22F58FA4008F21DF /* NSFileManager+BDAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 41662A0922F58FA4008F21DF /* NSFileManager+BDAdd.m */; };
 		B6DC8ADA424DF7C0455D10FB /* libPods-TKAudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7010636FA1D3EBB5846102 /* libPods-TKAudio.a */; };
 /* End PBXBuildFile section */
 
@@ -26,15 +29,12 @@
 		416629B522F560FC008F21DF /* TKAudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TKAudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		416629B822F560FC008F21DF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		416629B922F560FC008F21DF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		416629BB22F560FC008F21DF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		416629BC22F560FC008F21DF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		416629C122F560FD008F21DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		416629C422F560FD008F21DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		416629C622F560FD008F21DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		416629C722F560FD008F21DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		416629CE22F565B4008F21DF /* AudioVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioVC.h; sourceTree = "<group>"; };
-		416629CF22F565B4008F21DF /* AudioVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioVC.m; sourceTree = "<group>"; };
-		416629D222F56691008F21DF /* NSFileManager+BDAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+BDAdd.h"; sourceTree = "<group>"; };
+		416629CE22F565B4008F21DF /* TKAudioVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAudioVC.h; sourceTree = "<group>"; };
+		416629CF22F565B4008F21DF /* TKAudioVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAudioVC.m; sourceTree = "<group>"; };
 		416629D522F56691008F21DF /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
 		416629D622F56691008F21DF /* dec_if.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec_if.h; sourceTree = "<group>"; };
 		416629D722F56691008F21DF /* VoiceConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VoiceConverter.mm; sourceTree = "<group>"; };
@@ -45,11 +45,21 @@
 		416629DE22F56691008F21DF /* interf_enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_enc.h; sourceTree = "<group>"; };
 		416629E022F56691008F21DF /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
 		416629E122F56691008F21DF /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
-		416629E222F56691008F21DF /* NSFileManager+BDAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+BDAdd.m"; sourceTree = "<group>"; };
 		416629E822F566F0008F21DF /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
 		416629EA22F56701008F21DF /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
 		416629EC22F56710008F21DF /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		416629EF22F56BD7008F21DF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		416629F822F5854D008F21DF /* TKRecordItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TKRecordItem.h; sourceTree = "<group>"; };
+		416629F922F5854D008F21DF /* TKRecordItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TKRecordItem.m; sourceTree = "<group>"; };
+		416629FE22F58C0B008F21DF /* TKRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TKRootViewController.h; sourceTree = "<group>"; };
+		416629FF22F58C0B008F21DF /* TKRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TKRootViewController.m; sourceTree = "<group>"; };
+		41662A0222F58FA4008F21DF /* TKMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKMacro.h; sourceTree = "<group>"; };
+		41662A0322F58FA4008F21DF /* TKRecordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKRecordManager.h; sourceTree = "<group>"; };
+		41662A0422F58FA4008F21DF /* TKRecordManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKRecordManager.m; sourceTree = "<group>"; };
+		41662A0622F58FA4008F21DF /* NSFileManager+BDAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+BDAdd.h"; sourceTree = "<group>"; };
+		41662A0722F58FA4008F21DF /* UIView+TKAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TKAdd.h"; sourceTree = "<group>"; };
+		41662A0822F58FA4008F21DF /* UIView+TKAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TKAdd.m"; sourceTree = "<group>"; };
+		41662A0922F58FA4008F21DF /* NSFileManager+BDAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+BDAdd.m"; sourceTree = "<group>"; };
 		6D313D9835893826D71D27B9 /* Pods-TKAudio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TKAudio.debug.xcconfig"; path = "Target Support Files/Pods-TKAudio/Pods-TKAudio.debug.xcconfig"; sourceTree = "<group>"; };
 		85470C45EC6284C37FF046BD /* Pods-TKAudio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TKAudio.release.xcconfig"; path = "Target Support Files/Pods-TKAudio/Pods-TKAudio.release.xcconfig"; sourceTree = "<group>"; };
 		8D7010636FA1D3EBB5846102 /* libPods-TKAudio.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TKAudio.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,10 +116,12 @@
 				416629D122F56691008F21DF /* AudioTool */,
 				416629B822F560FC008F21DF /* AppDelegate.h */,
 				416629B922F560FC008F21DF /* AppDelegate.m */,
-				416629BB22F560FC008F21DF /* ViewController.h */,
-				416629BC22F560FC008F21DF /* ViewController.m */,
-				416629CE22F565B4008F21DF /* AudioVC.h */,
-				416629CF22F565B4008F21DF /* AudioVC.m */,
+				416629FE22F58C0B008F21DF /* TKRootViewController.h */,
+				416629FF22F58C0B008F21DF /* TKRootViewController.m */,
+				416629CE22F565B4008F21DF /* TKAudioVC.h */,
+				416629CF22F565B4008F21DF /* TKAudioVC.m */,
+				416629F822F5854D008F21DF /* TKRecordItem.h */,
+				416629F922F5854D008F21DF /* TKRecordItem.m */,
 				416629C122F560FD008F21DF /* Assets.xcassets */,
 				416629C322F560FD008F21DF /* LaunchScreen.storyboard */,
 				416629C622F560FD008F21DF /* Info.plist */,
@@ -121,9 +133,9 @@
 		416629D122F56691008F21DF /* AudioTool */ = {
 			isa = PBXGroup;
 			children = (
-				416629D222F56691008F21DF /* NSFileManager+BDAdd.h */,
+				41662A0522F58FA4008F21DF /* TKCategory */,
+				41662A0122F58FA4008F21DF /* TKRecord */,
 				416629D322F56691008F21DF /* VoiceConvert */,
-				416629E222F56691008F21DF /* NSFileManager+BDAdd.m */,
 			);
 			path = AudioTool;
 			sourceTree = "<group>";
@@ -177,6 +189,27 @@
 			path = amrwapper;
 			sourceTree = "<group>";
 		};
+		41662A0122F58FA4008F21DF /* TKRecord */ = {
+			isa = PBXGroup;
+			children = (
+				41662A0222F58FA4008F21DF /* TKMacro.h */,
+				41662A0322F58FA4008F21DF /* TKRecordManager.h */,
+				41662A0422F58FA4008F21DF /* TKRecordManager.m */,
+			);
+			path = TKRecord;
+			sourceTree = "<group>";
+		};
+		41662A0522F58FA4008F21DF /* TKCategory */ = {
+			isa = PBXGroup;
+			children = (
+				41662A0622F58FA4008F21DF /* NSFileManager+BDAdd.h */,
+				41662A0722F58FA4008F21DF /* UIView+TKAdd.h */,
+				41662A0822F58FA4008F21DF /* UIView+TKAdd.m */,
+				41662A0922F58FA4008F21DF /* NSFileManager+BDAdd.m */,
+			);
+			path = TKCategory;
+			sourceTree = "<group>";
+		};
 		B28CCAE60A1D4E533987D112 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +246,7 @@
 		416629AD22F560FC008F21DF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = TK;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = TK;
 				TargetAttributes = {
@@ -281,13 +315,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41662A0C22F58FA4008F21DF /* NSFileManager+BDAdd.m in Sources */,
+				41662A0B22F58FA4008F21DF /* UIView+TKAdd.m in Sources */,
 				416629E322F56691008F21DF /* VoiceConverter.mm in Sources */,
-				416629BD22F560FC008F21DF /* ViewController.m in Sources */,
 				416629C822F560FD008F21DF /* main.m in Sources */,
 				416629E622F56691008F21DF /* amrFileCodec.mm in Sources */,
-				416629E722F56691008F21DF /* NSFileManager+BDAdd.m in Sources */,
+				416629FA22F5854D008F21DF /* TKRecordItem.m in Sources */,
+				41662A0022F58C0B008F21DF /* TKRootViewController.m in Sources */,
+				41662A0A22F58FA4008F21DF /* TKRecordManager.m in Sources */,
 				416629BA22F560FC008F21DF /* AppDelegate.m in Sources */,
-				416629D022F565B4008F21DF /* AudioVC.m in Sources */,
+				416629D022F565B4008F21DF /* TKAudioVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
