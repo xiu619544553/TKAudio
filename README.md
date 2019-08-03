@@ -16,4 +16,5 @@ Demo实现如下功能：
 2. 修改Xcode配置：Build Settings > Enable Bitcode=NO
 
 3. Build Phases > Link Binary With Libraries > 导入`AVFoundation.framework`
+4. 
 
