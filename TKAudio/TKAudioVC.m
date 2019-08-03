@@ -31,8 +31,8 @@ typedef NS_ENUM(NSInteger, TKRecordingTouchStatus) {
 
 @interface TKAudioVC () <TKRecordDelegate> {
     BOOL              _isRecord; // 是否在录音
-    CGFloat           _recordTime;
-    TKRecordingTouchStatus _style;
+    CGFloat           _recordTime; // 录制时长
+    TKRecordingTouchStatus _touchStatus;
 }
 
 @property (nonatomic, strong) NSData *amrData;
@@ -81,7 +81,7 @@ typedef NS_ENUM(NSInteger, TKRecordingTouchStatus) {
             // 重置录制数据
             _recordTime = 0.f;
             _isRecord = YES;
-            _style = TKRecording_TouchInRecordingArea;
+            _touchStatus = TKRecording_TouchInRecordingArea;
             
             self.recordItem.hidden = NO;
             
@@ -104,9 +104,9 @@ typedef NS_ENUM(NSInteger, TKRecordingTouchStatus) {
     CGPoint point = [[touches anyObject] locationInView:self.view];
     CGFloat invalidMinY = CGRectGetMinY(self.recordContainerView.frame) + self.recordTitleLabel.height;
     if (point.y < invalidMinY) {
-        _style = TKRecording_TouchOutRecordingArea;
+        _touchStatus = TKRecording_TouchOutRecordingArea;
     } else {
-        _style = TKRecording_TouchInRecordingArea;
+        _touchStatus = TKRecording_TouchInRecordingArea;
     }
     [self updateLabelTitle];
 }
@@ -116,7 +116,7 @@ typedef NS_ENUM(NSInteger, TKRecordingTouchStatus) {
     
     self.view.userInteractionEnabled = YES;
     
-    if (_style == TKRecording_TouchInRecordingArea) {
+    if (_touchStatus == TKRecording_TouchInRecordingArea) {
         // 至少录制1s，才算是录制有效
         if (_recordTime >= 1.f) { // 结束录制
             [self.record stopRecorder];
@@ -125,7 +125,7 @@ typedef NS_ENUM(NSInteger, TKRecordingTouchStatus) {
             [self.recordItem removeFromSuperview];
             self.recordItem = nil;
         }
-    } else if (_style == TKRecording_TouchOutRecordingArea) {
+    } else if (_touchStatus == TKRecording_TouchOutRecordingArea) {
         // 取消录制
         [self.record cancelRecorder];
         
@@ -160,7 +160,7 @@ typedef NS_ENUM(NSInteger, TKRecordingTouchStatus) {
 // 重置视图状态
 - (void)resetAudioView {
     _isRecord = NO;
-    _style = TKRecordingUnknow;
+    _touchStatus = TKRecordingUnknow;
     self.recordProgressLine.width = 0.f;
     [self updateLabelTitle];
     [self.recordTimer invalidate];
@@ -181,7 +181,7 @@ typedef NS_ENUM(NSInteger, TKRecordingTouchStatus) {
 // 更新标签状态
 - (void)updateLabelTitle {
     CGFloat remainingTime = maxRecordTime - _recordTime;
-    if (_style == TKRecording_TouchInRecordingArea) {
+    if (_touchStatus == TKRecording_TouchInRecordingArea) {
         
         NSMutableAttributedString *titleLabelAttStr = nil;
         if (remainingTime <= 10.f) {// 10s倒计时
@@ -205,7 +205,7 @@ typedef NS_ENUM(NSInteger, TKRecordingTouchStatus) {
         [self.recordImgBtn setImage:nil forState:UIControlStateNormal];
         self.recordImgBtn.backgroundColor = UIColorFromRGB(242,242,242);
         
-    } else if (_style == TKRecording_TouchOutRecordingArea) {
+    } else if (_touchStatus == TKRecording_TouchOutRecordingArea) {
         
         NSMutableAttributedString *titleLabelAttStr = nil;
         if (remainingTime <= 10.f) {// 10s倒计时
@@ -230,8 +230,7 @@ typedef NS_ENUM(NSInteger, TKRecordingTouchStatus) {
         self.recordImgBtn.backgroundColor = TKThemeColor;
         [self.recordImgBtn setImage:[UIImage imageNamed:@"icon_move_delete"] forState:UIControlStateNormal];
     } else {
-        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:@"录制语音观点" attributes:@{NSForegroundColorAttributeName : TKWordColor, NSFontAttributeName : [UIFont systemFontOfSize:13.f]}];
-        [self.recordTitleLabel setAttributedText:attr];
+        self.recordTitleLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:@"长按录制语音" attributes:@{NSForegroundColorAttributeName : TKWordColor, NSFontAttributeName : [UIFont systemFontOfSize:13.f]}];
         
         self.recordLabel.hidden = NO;
         self.recordLabel.text = @"按住开始录音";
@@ -274,7 +273,7 @@ typedef NS_ENUM(NSInteger, TKRecordingTouchStatus) {
 }
 
 - (void)drawCircleWithVolume:(CGFloat)volume {
-    if (_style == TKRecording_TouchInRecordingArea) {
+    if (_touchStatus == TKRecording_TouchInRecordingArea) {
         
         CGPoint center = self.recordImgBtn.center;
         CGFloat recordImgBtnW = 90.f;
@@ -428,15 +427,16 @@ typedef NS_ENUM(NSInteger, TKRecordingTouchStatus) {
 }
 
 - (void)setupUI {
-    [self.view addSubview:self.recordContainerViewTopGrayView];
     [self.view addSubview:self.recordContainerView];
-    
     [self.recordContainerView addSubview:self.recordImgBtn];
     [self.recordContainerView addSubview:self.recordTitleLabel];
     [self.recordContainerView addSubview:self.titleBottomLine];
     [self.recordContainerView addSubview:self.recordLabel];
     [self.recordContainerView addSubview:self.recordProgressLine];
     [self.recordContainerView addSubview:self.reRecordingBtn];
+    
+    
+    [self.view addSubview:self.recordContainerViewTopGrayView];
     
     
     [self.recordContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
