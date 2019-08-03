@@ -15,60 +15,58 @@
 #import "TKRecordItem.h"
 #import "TKRecordManager.h"
 
-
 // 录制最大时长、精确度
 static CGFloat maxRecordTime = 90.f;
 static CGFloat recordAccuracy = 0.01f;
 
-typedef NS_ENUM(NSInteger, StockRecordStatus) {
-    StockRecordUnknow,        // 未知
-    StockRecord_Touched,      // 在有效区域
-    StockRecord_TouchedBeyond // 手指已超出有效区域，但是仍在录音
+/// 录制过程中，手指触摸点的区域状态
+typedef NS_ENUM(NSInteger, TKRecordingTouchStatus) {
+    /// 位置
+    TKRecordingUnknow,
+    /// 手指在录制区域内
+    TKRecording_TouchInRecordingArea,
+    /// 手指超出有效区域，但是仍在录音
+    TKRecording_TouchOutRecordingArea
 };
 
 @interface TKAudioVC () <TKRecordDelegate> {
     BOOL              _isRecord; // 是否在录音
     CGFloat           _recordTime;
-    StockRecordStatus _style;
+    TKRecordingTouchStatus _style;
 }
-@property (nonatomic, strong) NSData *amrData;///< arm二进制
+
+@property (nonatomic, strong) NSData *amrData;
 @property (nonatomic, strong) TKRecordManager *record;
-@property (nonatomic, strong) NSTimer *recordTimer;///< 记录录制时间计时器
+/// 记录录制时间计时器
+@property (nonatomic, strong) NSTimer *recordTimer;
 
 @property (nonatomic, strong) TKRecordItem *recordItem;
-
-@property (nonatomic, strong) UIView *bottomViewTopGrayViewTopLine;
-@property (nonatomic, strong) UIView *bottomViewTopGrayView;
-@property (nonatomic, strong) UIView *bottomViewTopLine;
-@property (nonatomic, strong) UIView *bottomView;
-
-// 录制语音状态显示的视图
-@property (nonatomic, strong) UILabel *recordTitleLabel;///< 录制语音观点
+@property (nonatomic, strong) UIView *recordContainerView;
+@property (nonatomic, strong) UIView *recordContainerViewTopGrayView;
+@property (nonatomic, strong) UILabel *recordTitleLabel;
 @property (nonatomic, strong) UIView *titleBottomLine;
-@property (nonatomic, strong) UILabel *recordLabel;///< 按住开始录音标签
+@property (nonatomic, strong) UILabel *recordLabel;
 @property (nonatomic, strong) UIButton *recordImgBtn;
 @property (nonatomic, strong) UIView *recordProgressLine;
-
-// 语音录制完成显示的视图
-@property (nonatomic, strong) UIButton *re_recordingBtn;///< 重新录制按钮
+@property (nonatomic, strong) UIButton *reRecordingBtn;
 @end
 
 @implementation TKAudioVC
+
+#pragma mark - LifeCycle Methods
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"录制语音";
     self.view.backgroundColor = UIColor.whiteColor;
-    
     [self setupUI];
 }
 
 #pragma mark - Touch Methods
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event
-{    
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
     CGPoint point = [[touches anyObject] locationInView:self.view];
-    if (!CGRectContainsPoint(self.bottomView.frame, point)) {
+    if (!CGRectContainsPoint(self.recordContainerView.frame, point)) {
         return;
     }
     
@@ -76,19 +74,19 @@ typedef NS_ENUM(NSInteger, StockRecordStatus) {
     
     if (!_isRecord) {
         CGFloat touchIncrement = 20.f;
-        CGRect recordFrame = CGRectMake(self.recordImgBtn.x - touchIncrement, self.bottomView.y + self.recordTitleLabel.height - touchIncrement, self.recordImgBtn.width + touchIncrement * 2, self.recordImgBtn.height + touchIncrement * 2);
+        CGRect recordFrame = CGRectMake(self.recordImgBtn.x - touchIncrement, self.recordContainerView.y + self.recordTitleLabel.height - touchIncrement, self.recordImgBtn.width + touchIncrement * 2, self.recordImgBtn.height + touchIncrement * 2);
         
         if (CGRectContainsPoint(recordFrame, point)) {
             
+            // 重置录制数据
             _recordTime = 0.f;
             _isRecord = YES;
+            _style = TKRecording_TouchInRecordingArea;
+            
             self.recordItem.hidden = NO;
             
-            _style = StockRecord_Touched;
             [self updateLabelTitle];
-            
             [self addRecordTimer];
-            self.recordLabel.text = @"松开按钮完成录制";
             
             // 开始录制音频
             self.record = [[TKRecordManager alloc] init];
@@ -100,38 +98,34 @@ typedef NS_ENUM(NSInteger, StockRecordStatus) {
     }
 }
 
-- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     if (!_isRecord) { return; }
     
     CGPoint point = [[touches anyObject] locationInView:self.view];
-    CGFloat invalidMinY = CGRectGetMinY(self.bottomView.frame) + self.recordTitleLabel.height;
+    CGFloat invalidMinY = CGRectGetMinY(self.recordContainerView.frame) + self.recordTitleLabel.height;
     if (point.y < invalidMinY) {
-        _style = StockRecord_TouchedBeyond;
+        _style = TKRecording_TouchOutRecordingArea;
     } else {
-        _style = StockRecord_Touched;
+        _style = TKRecording_TouchInRecordingArea;
     }
     [self updateLabelTitle];
 }
 
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event
-{
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
     if (!_isRecord) { return; }
     
     self.view.userInteractionEnabled = YES;
     
-    if (_style == StockRecord_Touched) {
+    if (_style == TKRecording_TouchInRecordingArea) {
         // 至少录制1s，才算是录制有效
-        if (_recordTime >= 1.f) {
-            // 结束录制
+        if (_recordTime >= 1.f) { // 结束录制
             [self.record stopRecorder];
-        } else {
-            // 取消录制
+        } else { // 取消录制
             [self.record cancelRecorder];
             [self.recordItem removeFromSuperview];
             self.recordItem = nil;
         }
-    } else if (_style == StockRecord_TouchedBeyond) {
+    } else if (_style == TKRecording_TouchOutRecordingArea) {
         // 取消录制
         [self.record cancelRecorder];
         
@@ -140,13 +134,13 @@ typedef NS_ENUM(NSInteger, StockRecordStatus) {
         
         _amrData = nil;
     }
+    
     [self resetAudioView];
     [self updateLabelTitle];
 }
 
 // 记录录音时长 0.01
-- (void)recordTimerAction
-{
+- (void)recordTimerAction {
     if (!_isRecord) {
         [self resetAudioView];
     }
@@ -158,16 +152,15 @@ typedef NS_ENUM(NSInteger, StockRecordStatus) {
     if (maxRecordTime - _recordTime <= recordAccuracy) {
         // 最多录制90s，结束录制
         [self resetAudioView];
-        
         // 结束录制
         [self.record stopRecorder];
     }
 }
 
-- (void)resetAudioView
-{
+// 重置视图状态
+- (void)resetAudioView {
     _isRecord = NO;
-    _style = StockRecordUnknow;
+    _style = TKRecordingUnknow;
     self.recordProgressLine.width = 0.f;
     [self updateLabelTitle];
     [self.recordTimer invalidate];
@@ -175,8 +168,8 @@ typedef NS_ENUM(NSInteger, StockRecordStatus) {
     self.view.userInteractionEnabled = YES;
 }
 
-- (void)addRecordTimer
-{
+// 添加录制时长计时器
+- (void)addRecordTimer {
     if (self.recordTimer) {
         [self.recordTimer invalidate];
         self.recordTimer = nil;
@@ -185,10 +178,10 @@ typedef NS_ENUM(NSInteger, StockRecordStatus) {
     [[NSRunLoop currentRunLoop] addTimer:self.recordTimer forMode:NSRunLoopCommonModes];
 }
 
-- (void)updateLabelTitle
-{
+// 更新标签状态
+- (void)updateLabelTitle {
     CGFloat remainingTime = maxRecordTime - _recordTime;
-    if (_style == StockRecord_Touched) {
+    if (_style == TKRecording_TouchInRecordingArea) {
         
         NSMutableAttributedString *titleLabelAttStr = nil;
         if (remainingTime <= 10.f) {// 10s倒计时
@@ -212,7 +205,7 @@ typedef NS_ENUM(NSInteger, StockRecordStatus) {
         [self.recordImgBtn setImage:nil forState:UIControlStateNormal];
         self.recordImgBtn.backgroundColor = UIColorFromRGB(242,242,242);
         
-    } else if (_style == StockRecord_TouchedBeyond) {
+    } else if (_style == TKRecording_TouchOutRecordingArea) {
         
         NSMutableAttributedString *titleLabelAttStr = nil;
         if (remainingTime <= 10.f) {// 10s倒计时
@@ -249,22 +242,20 @@ typedef NS_ENUM(NSInteger, StockRecordStatus) {
     }
 }
 
-- (void)recoverRecordImgBtnFrame
-{
+- (void)recoverRecordImgBtnFrame {
     self.recordImgBtn.layer.borderWidth = 1.f;
     CGFloat recordBtnW = 90.f;
     self.recordImgBtn.frame = (CGRect){{(self.view.width - recordBtnW)/2.f, CGRectGetMaxY(self.titleBottomLine.frame) + 37.f}, {recordBtnW, recordBtnW}};
     self.recordImgBtn.layer.cornerRadius = CGRectGetWidth(self.recordImgBtn.bounds)/2.f;
 }
 
-#pragma mark - StockRecorderDelegate Methods
+#pragma mark - TKRecordingerDelegate Methods
 
-- (void)convertSuccessAmrData:(NSData *)amrData amrPath:(NSString *)amrPath
-{
+- (void)convertSuccessAmrData:(NSData *)amrData amrPath:(NSString *)amrPath {
     _amrData = amrData;
     
     // 录制结束
-    self.re_recordingBtn.hidden = NO;
+    self.reRecordingBtn.hidden = NO;
     self.recordImgBtn.hidden = YES;
     self.recordTitleLabel.hidden = YES;
     self.titleBottomLine.hidden = YES;
@@ -278,14 +269,12 @@ typedef NS_ENUM(NSInteger, StockRecordStatus) {
 
 - (void)convertFaild {}
 
-- (void)realTimeUpdateVolume:(CGFloat)volume
-{
+- (void)realTimeUpdateVolume:(CGFloat)volume {
     [self drawCircleWithVolume:volume];
 }
 
-- (void)drawCircleWithVolume:(CGFloat)volume
-{
-    if (_style == StockRecord_Touched) {
+- (void)drawCircleWithVolume:(CGFloat)volume {
+    if (_style == TKRecording_TouchInRecordingArea) {
         
         CGPoint center = self.recordImgBtn.center;
         CGFloat recordImgBtnW = 90.f;
@@ -302,7 +291,7 @@ typedef NS_ENUM(NSInteger, StockRecordStatus) {
 
 #pragma mark - Event Methods
 
-- (void)re_recordingBtnClick:(UIButton *)sender {
+- (void)reRecordingBtnClick:(UIButton *)sender {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"是否重新录制？" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *knowAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *configAction = [UIAlertAction actionWithTitle:@"重新录制" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
@@ -310,7 +299,7 @@ typedef NS_ENUM(NSInteger, StockRecordStatus) {
         [TKRecordManager remove_Amr_Wav_Record];
         
         // 视图
-        self.re_recordingBtn.hidden = YES;
+        self.reRecordingBtn.hidden = YES;
         self.recordImgBtn.hidden = NO;
         self.recordTitleLabel.hidden = NO;
         self.titleBottomLine.hidden = NO;
@@ -329,36 +318,20 @@ typedef NS_ENUM(NSInteger, StockRecordStatus) {
 
 #pragma mark - getter
 
-- (UIView *)bottomView {
-    if (!_bottomView) {
-        _bottomView = [UIView new];
-        _bottomView.backgroundColor = [UIColor whiteColor];
+- (UIView *)recordContainerView {
+    if (!_recordContainerView) {
+        _recordContainerView = [UIView new];
+        _recordContainerView.backgroundColor = [UIColor whiteColor];
     }
-    return _bottomView;
+    return _recordContainerView;
 }
 
-- (UIView *)bottomViewTopGrayViewTopLine {
-    if (!_bottomViewTopGrayViewTopLine) {
-        _bottomViewTopGrayViewTopLine = [UIView new];
-        _bottomViewTopGrayViewTopLine.backgroundColor = TKSeparatorColor;
+- (UIView *)recordContainerViewTopGrayView {
+    if (!_recordContainerViewTopGrayView) {
+        _recordContainerViewTopGrayView = [UIView new];
+        _recordContainerViewTopGrayView.backgroundColor = UIColor.groupTableViewBackgroundColor;
     }
-    return _bottomViewTopGrayViewTopLine;
-}
-
-- (UIView *)bottomViewTopLine {
-    if (!_bottomViewTopLine) {
-        _bottomViewTopLine = [UIView new];
-        _bottomViewTopLine.backgroundColor = TKSeparatorColor;
-    }
-    return _bottomViewTopLine;
-}
-
-- (UIView *)bottomViewTopGrayView {
-    if (!_bottomViewTopGrayView) {
-        _bottomViewTopGrayView = [UIView new];
-        _bottomViewTopGrayView.backgroundColor = UIColor.groupTableViewBackgroundColor;
-    }
-    return _bottomViewTopGrayView;
+    return _recordContainerViewTopGrayView;
 }
 
 - (UILabel *)recordTitleLabel {
@@ -409,25 +382,24 @@ typedef NS_ENUM(NSInteger, StockRecordStatus) {
     return _recordImgBtn;
 }
 
-- (UIButton *)re_recordingBtn
-{
-    if (!_re_recordingBtn) {
-        _re_recordingBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _re_recordingBtn.hidden = YES;
-        _re_recordingBtn.adjustsImageWhenHighlighted = NO;
-        _re_recordingBtn.bounds = (CGRect){{0.f, 0.f}, {90.f, 90.f}};
-        [_re_recordingBtn setImage:[UIImage imageNamed:@"icon_delete_audio"]
+- (UIButton *)reRecordingBtn {
+    if (!_reRecordingBtn) {
+        _reRecordingBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _reRecordingBtn.hidden = YES;
+        _reRecordingBtn.adjustsImageWhenHighlighted = NO;
+        _reRecordingBtn.bounds = (CGRect){{0.f, 0.f}, {90.f, 90.f}};
+        [_reRecordingBtn setImage:[UIImage imageNamed:@"icon_delete_audio"]
                           forState:UIControlStateNormal];
-        _re_recordingBtn.contentMode = UIViewContentModeScaleAspectFit;
-        _re_recordingBtn.layer.cornerRadius = CGRectGetWidth(_re_recordingBtn.bounds)/2.f;
-        _re_recordingBtn.layer.masksToBounds = YES;
-        _re_recordingBtn.layer.borderColor = TKSeparatorColor.CGColor;
-        _re_recordingBtn.layer.borderWidth = 1.f;
-        [_re_recordingBtn addTarget:self
-                             action:@selector(re_recordingBtnClick:)
+        _reRecordingBtn.contentMode = UIViewContentModeScaleAspectFit;
+        _reRecordingBtn.layer.cornerRadius = CGRectGetWidth(_reRecordingBtn.bounds)/2.f;
+        _reRecordingBtn.layer.masksToBounds = YES;
+        _reRecordingBtn.layer.borderColor = TKSeparatorColor.CGColor;
+        _reRecordingBtn.layer.borderWidth = 1.f;
+        [_reRecordingBtn addTarget:self
+                             action:@selector(reRecordingBtnClick:)
                    forControlEvents:UIControlEventTouchUpInside];
     }
-    return _re_recordingBtn;
+    return _reRecordingBtn;
 }
 
 - (UIView *)recordProgressLine {
@@ -440,7 +412,7 @@ typedef NS_ENUM(NSInteger, StockRecordStatus) {
 
 - (TKRecordItem *)recordItem {
     if (!_recordItem) {
-        _recordItem = [[TKRecordItem alloc] initWithFrame:CGRectMake(0.f, 100.f, self.view.frame.size.width, 40.f)];
+        _recordItem = [[TKRecordItem alloc] initWithFrame:CGRectMake(0.f, 200, self.view.frame.size.width, 40.f)];
         _recordItem.hidden = YES;
         [self.view addSubview:_recordItem];
     }
@@ -455,73 +427,54 @@ typedef NS_ENUM(NSInteger, StockRecordStatus) {
     return lineView;
 }
 
-- (void)setupUI
-{
-    [self.view addSubview:self.bottomView];
+- (void)setupUI {
+    [self.view addSubview:self.recordContainerViewTopGrayView];
+    [self.view addSubview:self.recordContainerView];
     
-    // 录制语音状态显示的视图
-    [self.bottomView addSubview:self.recordImgBtn];
-    [self.bottomView addSubview:self.recordTitleLabel];
-    [self.bottomView addSubview:self.titleBottomLine];
-    [self.bottomView addSubview:self.recordLabel];
-    [self.bottomView addSubview:self.recordProgressLine];
-    
-    // 重新录制
-    [self.bottomView addSubview:self.re_recordingBtn];
-    
-    [self.view addSubview:self.bottomViewTopLine];
-    [self.view addSubview:self.bottomViewTopGrayView];
-    [self.view addSubview:self.bottomViewTopGrayViewTopLine];
+    [self.recordContainerView addSubview:self.recordImgBtn];
+    [self.recordContainerView addSubview:self.recordTitleLabel];
+    [self.recordContainerView addSubview:self.titleBottomLine];
+    [self.recordContainerView addSubview:self.recordLabel];
+    [self.recordContainerView addSubview:self.recordProgressLine];
+    [self.recordContainerView addSubview:self.reRecordingBtn];
     
     
-    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.recordContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
         make.height.mas_equalTo(240);
     }];
-    [self.bottomViewTopLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(kSINGLE_LINE);
-        make.bottom.equalTo(self.bottomView.mas_top);
-    }];
-    [self.bottomViewTopGrayView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.recordContainerViewTopGrayView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         make.height.mas_equalTo(10.f);
-        make.bottom.equalTo(self.bottomViewTopLine.mas_top);
+        make.bottom.equalTo(self.recordContainerView.mas_top);
     }];
-    [self.bottomViewTopGrayViewTopLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.bottomViewTopGrayView.mas_top);
-        make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(kSINGLE_LINE);
-    }];
-    
-    // 录制语音状态显示的视图
     [self.recordTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self.bottomView);
+        make.top.left.right.equalTo(self.recordContainerView);
         make.height.mas_equalTo(44.f);
     }];
     [self.titleBottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.recordTitleLabel.mas_bottom);
-        make.left.right.equalTo(self.bottomView);
+        make.left.right.equalTo(self.recordContainerView);
         make.height.mas_equalTo(kSINGLE_LINE);
     }];
     [self.recordProgressLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleBottomLine.mas_bottom);
-        make.left.equalTo(self.bottomView);
+        make.left.equalTo(self.recordContainerView);
         make.size.mas_equalTo(CGSizeMake(0.f, 2.f));
     }];
     [self.recordImgBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.bottomView.mas_centerX);
+        make.centerX.equalTo(self.recordContainerView.mas_centerX);
         make.top.equalTo(self.titleBottomLine.mas_bottom).offset(37.f);
         make.size.mas_equalTo(self.recordImgBtn.frame.size);
     }];
     [self.recordLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.bottomView);
-        make.bottom.equalTo(self.bottomView).offset(-37.f);
+        make.left.right.equalTo(self.recordContainerView);
+        make.bottom.equalTo(self.recordContainerView).offset(-37.f);
     }];
     
     // 重新录制
-    [self.re_recordingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.bottomView.mas_centerX);
+    [self.reRecordingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.recordContainerView.mas_centerX);
         make.top.equalTo(self.titleBottomLine.mas_bottom).offset(37.f);
         make.size.mas_equalTo(self.recordImgBtn.frame.size);
     }];

@@ -25,7 +25,7 @@
 
 @implementation TKRecordManager
 - (void)dealloc {
-    NSLog(@"%@>销毁..", NSStringFromClass(self.class));
+    NSLog(@"%@ > 销毁..", NSStringFromClass(self.class));
 }
 
 - (void)addDetectVolumeTimer {
