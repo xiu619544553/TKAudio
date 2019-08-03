@@ -1,0 +1,494 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		416629BA22F560FC008F21DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 416629B922F560FC008F21DF /* AppDelegate.m */; };
+		416629BD22F560FC008F21DF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 416629BC22F560FC008F21DF /* ViewController.m */; };
+		416629C222F560FD008F21DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 416629C122F560FD008F21DF /* Assets.xcassets */; };
+		416629C522F560FD008F21DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 416629C322F560FD008F21DF /* LaunchScreen.storyboard */; };
+		416629C822F560FD008F21DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 416629C722F560FD008F21DF /* main.m */; };
+		416629D022F565B4008F21DF /* AudioVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 416629CF22F565B4008F21DF /* AudioVC.m */; };
+		416629E322F56691008F21DF /* VoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 416629D722F56691008F21DF /* VoiceConverter.mm */; };
+		416629E422F56691008F21DF /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 416629D922F56691008F21DF /* libopencore-amrwb.a */; };
+		416629E522F56691008F21DF /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 416629DA22F56691008F21DF /* libopencore-amrnb.a */; };
+		416629E622F56691008F21DF /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 416629E022F56691008F21DF /* amrFileCodec.mm */; };
+		416629E722F56691008F21DF /* NSFileManager+BDAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 416629E222F56691008F21DF /* NSFileManager+BDAdd.m */; };
+		416629F022F56BD7008F21DF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 416629EF22F56BD7008F21DF /* AVFoundation.framework */; };
+		B6DC8ADA424DF7C0455D10FB /* libPods-TKAudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7010636FA1D3EBB5846102 /* libPods-TKAudio.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		416629B522F560FC008F21DF /* TKAudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TKAudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		416629B822F560FC008F21DF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		416629B922F560FC008F21DF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		416629BB22F560FC008F21DF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		416629BC22F560FC008F21DF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		416629C122F560FD008F21DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		416629C422F560FD008F21DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		416629C622F560FD008F21DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		416629C722F560FD008F21DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		416629CE22F565B4008F21DF /* AudioVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioVC.h; sourceTree = "<group>"; };
+		416629CF22F565B4008F21DF /* AudioVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioVC.m; sourceTree = "<group>"; };
+		416629D222F56691008F21DF /* NSFileManager+BDAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+BDAdd.h"; sourceTree = "<group>"; };
+		416629D522F56691008F21DF /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
+		416629D622F56691008F21DF /* dec_if.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec_if.h; sourceTree = "<group>"; };
+		416629D722F56691008F21DF /* VoiceConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VoiceConverter.mm; sourceTree = "<group>"; };
+		416629D922F56691008F21DF /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
+		416629DA22F56691008F21DF /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
+		416629DB22F56691008F21DF /* VoiceConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceConverter.h; sourceTree = "<group>"; };
+		416629DD22F56691008F21DF /* interf_dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_dec.h; sourceTree = "<group>"; };
+		416629DE22F56691008F21DF /* interf_enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_enc.h; sourceTree = "<group>"; };
+		416629E022F56691008F21DF /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
+		416629E122F56691008F21DF /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
+		416629E222F56691008F21DF /* NSFileManager+BDAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+BDAdd.m"; sourceTree = "<group>"; };
+		416629E822F566F0008F21DF /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
+		416629EA22F56701008F21DF /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		416629EC22F56710008F21DF /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		416629EF22F56BD7008F21DF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		6D313D9835893826D71D27B9 /* Pods-TKAudio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TKAudio.debug.xcconfig"; path = "Target Support Files/Pods-TKAudio/Pods-TKAudio.debug.xcconfig"; sourceTree = "<group>"; };
+		85470C45EC6284C37FF046BD /* Pods-TKAudio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TKAudio.release.xcconfig"; path = "Target Support Files/Pods-TKAudio/Pods-TKAudio.release.xcconfig"; sourceTree = "<group>"; };
+		8D7010636FA1D3EBB5846102 /* libPods-TKAudio.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TKAudio.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		416629B222F560FC008F21DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				416629F022F56BD7008F21DF /* AVFoundation.framework in Frameworks */,
+				416629E422F56691008F21DF /* libopencore-amrwb.a in Frameworks */,
+				416629E522F56691008F21DF /* libopencore-amrnb.a in Frameworks */,
+				B6DC8ADA424DF7C0455D10FB /* libPods-TKAudio.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2C5F783CC8062602BAA41E8B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				416629EF22F56BD7008F21DF /* AVFoundation.framework */,
+				416629EC22F56710008F21DF /* libstdc++.tbd */,
+				416629EA22F56701008F21DF /* libstdc++.6.0.9.dylib */,
+				416629E822F566F0008F21DF /* libstdc++.6.tbd */,
+				8D7010636FA1D3EBB5846102 /* libPods-TKAudio.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		416629AC22F560FC008F21DF = {
+			isa = PBXGroup;
+			children = (
+				416629B722F560FC008F21DF /* TKAudio */,
+				416629B622F560FC008F21DF /* Products */,
+				B28CCAE60A1D4E533987D112 /* Pods */,
+				2C5F783CC8062602BAA41E8B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		416629B622F560FC008F21DF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				416629B522F560FC008F21DF /* TKAudio.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		416629B722F560FC008F21DF /* TKAudio */ = {
+			isa = PBXGroup;
+			children = (
+				416629D122F56691008F21DF /* AudioTool */,
+				416629B822F560FC008F21DF /* AppDelegate.h */,
+				416629B922F560FC008F21DF /* AppDelegate.m */,
+				416629BB22F560FC008F21DF /* ViewController.h */,
+				416629BC22F560FC008F21DF /* ViewController.m */,
+				416629CE22F565B4008F21DF /* AudioVC.h */,
+				416629CF22F565B4008F21DF /* AudioVC.m */,
+				416629C122F560FD008F21DF /* Assets.xcassets */,
+				416629C322F560FD008F21DF /* LaunchScreen.storyboard */,
+				416629C622F560FD008F21DF /* Info.plist */,
+				416629C722F560FD008F21DF /* main.m */,
+			);
+			path = TKAudio;
+			sourceTree = "<group>";
+		};
+		416629D122F56691008F21DF /* AudioTool */ = {
+			isa = PBXGroup;
+			children = (
+				416629D222F56691008F21DF /* NSFileManager+BDAdd.h */,
+				416629D322F56691008F21DF /* VoiceConvert */,
+				416629E222F56691008F21DF /* NSFileManager+BDAdd.m */,
+			);
+			path = AudioTool;
+			sourceTree = "<group>";
+		};
+		416629D322F56691008F21DF /* VoiceConvert */ = {
+			isa = PBXGroup;
+			children = (
+				416629D422F56691008F21DF /* opencore-amrwb */,
+				416629D722F56691008F21DF /* VoiceConverter.mm */,
+				416629D822F56691008F21DF /* lib */,
+				416629DB22F56691008F21DF /* VoiceConverter.h */,
+				416629DC22F56691008F21DF /* opencore-amrnb */,
+				416629DF22F56691008F21DF /* amrwapper */,
+			);
+			path = VoiceConvert;
+			sourceTree = "<group>";
+		};
+		416629D422F56691008F21DF /* opencore-amrwb */ = {
+			isa = PBXGroup;
+			children = (
+				416629D522F56691008F21DF /* if_rom.h */,
+				416629D622F56691008F21DF /* dec_if.h */,
+			);
+			path = "opencore-amrwb";
+			sourceTree = "<group>";
+		};
+		416629D822F56691008F21DF /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				416629D922F56691008F21DF /* libopencore-amrwb.a */,
+				416629DA22F56691008F21DF /* libopencore-amrnb.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		416629DC22F56691008F21DF /* opencore-amrnb */ = {
+			isa = PBXGroup;
+			children = (
+				416629DD22F56691008F21DF /* interf_dec.h */,
+				416629DE22F56691008F21DF /* interf_enc.h */,
+			);
+			path = "opencore-amrnb";
+			sourceTree = "<group>";
+		};
+		416629DF22F56691008F21DF /* amrwapper */ = {
+			isa = PBXGroup;
+			children = (
+				416629E022F56691008F21DF /* amrFileCodec.mm */,
+				416629E122F56691008F21DF /* amrFileCodec.h */,
+			);
+			path = amrwapper;
+			sourceTree = "<group>";
+		};
+		B28CCAE60A1D4E533987D112 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6D313D9835893826D71D27B9 /* Pods-TKAudio.debug.xcconfig */,
+				85470C45EC6284C37FF046BD /* Pods-TKAudio.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		416629B422F560FC008F21DF /* TKAudio */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 416629CB22F560FD008F21DF /* Build configuration list for PBXNativeTarget "TKAudio" */;
+			buildPhases = (
+				5D428A5A6C9B954EC418FE4F /* [CP] Check Pods Manifest.lock */,
+				416629B122F560FC008F21DF /* Sources */,
+				416629B222F560FC008F21DF /* Frameworks */,
+				416629B322F560FC008F21DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TKAudio;
+			productName = TKAudio;
+			productReference = 416629B522F560FC008F21DF /* TKAudio.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		416629AD22F560FC008F21DF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = TK;
+				TargetAttributes = {
+					416629B422F560FC008F21DF = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 416629B022F560FC008F21DF /* Build configuration list for PBXProject "TKAudio" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 416629AC22F560FC008F21DF;
+			productRefGroup = 416629B622F560FC008F21DF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				416629B422F560FC008F21DF /* TKAudio */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		416629B322F560FC008F21DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				416629C522F560FD008F21DF /* LaunchScreen.storyboard in Resources */,
+				416629C222F560FD008F21DF /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5D428A5A6C9B954EC418FE4F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TKAudio-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		416629B122F560FC008F21DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				416629E322F56691008F21DF /* VoiceConverter.mm in Sources */,
+				416629BD22F560FC008F21DF /* ViewController.m in Sources */,
+				416629C822F560FD008F21DF /* main.m in Sources */,
+				416629E622F56691008F21DF /* amrFileCodec.mm in Sources */,
+				416629E722F56691008F21DF /* NSFileManager+BDAdd.m in Sources */,
+				416629BA22F560FC008F21DF /* AppDelegate.m in Sources */,
+				416629D022F565B4008F21DF /* AudioVC.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		416629C322F560FD008F21DF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				416629C422F560FD008F21DF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		416629C922F560FD008F21DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		416629CA22F560FD008F21DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		416629CC22F560FD008F21DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6D313D9835893826D71D27B9 /* Pods-TKAudio.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2V44FUSCNG;
+				ENABLE_BITCODE = NO;
+				GCC_INPUT_FILETYPE = automatic;
+				INFOPLIST_FILE = TKAudio/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TKAudio/AudioTool/VoiceConvert/lib",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tank;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		416629CD22F560FD008F21DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85470C45EC6284C37FF046BD /* Pods-TKAudio.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2V44FUSCNG;
+				ENABLE_BITCODE = NO;
+				GCC_INPUT_FILETYPE = automatic;
+				INFOPLIST_FILE = TKAudio/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TKAudio/AudioTool/VoiceConvert/lib",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tank;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		416629B022F560FC008F21DF /* Build configuration list for PBXProject "TKAudio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				416629C922F560FD008F21DF /* Debug */,
+				416629CA22F560FD008F21DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		416629CB22F560FD008F21DF /* Build configuration list for PBXNativeTarget "TKAudio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				416629CC22F560FD008F21DF /* Debug */,
+				416629CD22F560FD008F21DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 416629AD22F560FC008F21DF /* Project object */;
+}
